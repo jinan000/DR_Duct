@@ -370,7 +370,7 @@
 .contact-map-section {
   position: relative;
   max-width: var(--container-max);
-  margin: 0 auto var(--space-20);
+  margin: 0 auto var(--space-16);
   padding: 0 var(--container-padding);
 }
 
@@ -477,7 +477,7 @@
 /* ── Final Strong CTA ── */
 .contact-final-cta {
   position: relative;
-  padding: var(--space-24) var(--container-padding);
+  padding: var(--space-16) var(--container-padding);
   text-align: center;
   background-color: var(--color-surface);
   border-top: 1px solid rgba(255, 255, 255, 0.05);

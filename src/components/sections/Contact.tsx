@@ -235,7 +235,7 @@ export default function Contact() {
             Get in touch with Dr. Duct UK Ltd today.
           </p>
           <div className={`anim-reveal-up delay-200 ${ctaInView ? 'is-visible' : ''}`}>
-            <QuoteButton id="final-contact-cta" label="GET A QUOTE →" />
+            <QuoteButton id="final-contact-cta" label="GET A QUOTE" />
           </div>
         </div>
       </div>
