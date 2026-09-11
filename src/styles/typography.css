@@ -1,0 +1,107 @@
+/* ================================================
+   DR. DUCT UK LTD — Typography System
+   Condensed Industrial Display + Clean Body
+   ================================================ */
+
+/* ── Display Headings (Bebas Neue) ── */
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.heading-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.heading-watermark {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(6rem, 20vw, 20rem);
+  line-height: 0.85;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Section Headings ── */
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ── Body Text ── */
+.text-body {
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
+  line-height: 1.7;
+  font-weight: 300;
+  color: var(--color-muted);
+}
+
+.text-body-sm {
+  font-family: var(--font-body);
+  font-size: clamp(0.8125rem, 0.8vw + 0.4rem, 0.9375rem);
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+/* ── Labels ── */
+.label {
+  font-family: var(--font-body);
+  font-size: clamp(0.6875rem, 0.7vw + 0.3rem, 0.8125rem);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.label-lime {
+  color: var(--color-lime);
+}
+
+/* ── Navigation Text ── */
+.text-nav {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ── CTA Text ── */
+.text-cta {
+  font-family: var(--font-body);
+  font-size: clamp(0.8125rem, 0.8vw + 0.4rem, 0.9375rem);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}

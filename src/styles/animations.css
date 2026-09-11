@@ -1,0 +1,112 @@
+/* ================================================
+   DR. DUCT UK LTD — Animation System
+   Cinematic, Subtle, GPU-friendly
+   ================================================ */
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-bg-image {
+    animation: none !important;
+  }
+}
+
+/* ── Keyframes ── */
+
+/* Fade in up — used for staggered reveals */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in — simple opacity */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Scale reveal — for watermark */
+@keyframes scaleReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Cinematic slow zoom — for background */
+@keyframes cinematicZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.04);
+  }
+}
+
+/* Subtle pulse glow — for CTA */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(216, 240, 0, 0.1),
+                0 0 40px rgba(216, 240, 0, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(216, 240, 0, 0.18),
+                0 0 50px rgba(216, 240, 0, 0.08);
+  }
+}
+
+/* Horizontal lime rule animation */
+@keyframes lineGrow {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ── Animation Classes ── */
+
+.anim-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp var(--duration-cinematic) var(--ease-out) forwards;
+}
+
+.anim-fade-in {
+  opacity: 0;
+  animation: fadeIn var(--duration-cinematic) var(--ease-out) forwards;
+}
+
+.anim-scale-reveal {
+  opacity: 0;
+  animation: scaleReveal 1200ms var(--ease-out) forwards;
+}
+
+/* Stagger delays (used via inline style or class) */
+.delay-200 { animation-delay: 200ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-750 { animation-delay: 750ms; }
+.delay-900 { animation-delay: 900ms; }
+.delay-1100 { animation-delay: 1100ms; }
+.delay-1250 { animation-delay: 1250ms; }

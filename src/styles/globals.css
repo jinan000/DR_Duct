@@ -1,0 +1,181 @@
+/* ================================================
+   DR. DUCT UK LTD — Global Design System
+   Premium Industrial Brand Tokens & Reset
+   ================================================ */
+
+:root {
+  /* ── Color System ── */
+  --color-black: #050505;
+  --color-charcoal: #111111;
+  --color-charcoal-light: #1a1a1a;
+  --color-surface: #111111;
+  --color-lime: #D8F000;
+  --color-white: #F5F5F5;
+  --color-muted: #B8B8B8;
+  --color-overlay: rgba(5, 5, 5, 0.7);
+  --color-overlay-heavy: rgba(5, 5, 5, 0.85);
+
+  /* ── Lime Glow ── */
+  --glow-lime: 0 0 20px rgba(216, 240, 0, 0.15);
+  --glow-lime-hover: 0 0 30px rgba(216, 240, 0, 0.25);
+  --glow-lime-strong: 0 0 40px rgba(216, 240, 0, 0.35);
+
+  /* ── Typography ── */
+  --font-display: 'Bebas Neue', 'Impact', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ── Spacing (8px rhythm) ── */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.5rem;    /* 24px */
+  --space-6: 2rem;      /* 32px */
+  --space-7: 2.5rem;    /* 40px */
+  --space-8: 3rem;      /* 48px */
+  --space-9: 4rem;      /* 64px */
+  --space-10: 5rem;     /* 80px */
+  --space-11: 6rem;     /* 96px */
+  --space-12: 8rem;     /* 128px */
+  --space-14: 10rem;    /* 160px */
+  --space-16: 12rem;    /* 192px */
+
+  /* ── Border Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* ── Transitions ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-cinematic: 800ms;
+
+  /* ── Container ── */
+  --container-max: 1400px;
+  --container-padding: clamp(1.25rem, 5vw, 4rem);
+
+  /* ── Z-Index Scale ── */
+  --z-base: 0;
+  --z-watermark: 1;
+  --z-content: 10;
+  --z-header: 100;
+  --z-mobile-menu: 200;
+  --z-overlay: 300;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-white);
+  background-color: var(--color-black);
+  overflow-x: hidden;
+}
+
+/* ── Global Film Grain Texture ── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ── Selection ── */
+::selection {
+  background-color: var(--color-lime);
+  color: var(--color-black);
+}
+
+/* ── Focus States ── */
+:focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: 3px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-charcoal-light);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* ── Utility ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

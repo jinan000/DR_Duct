@@ -1,0 +1,410 @@
+/* ================================================
+   Hero — Cinematic Full-Screen Industrial Hero
+   ================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--color-black);
+}
+
+/* ── Background Image ── */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+}
+
+.hero__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% center;
+  animation: cinematicZoom 20s ease-in-out infinite alternate;
+}
+
+/* ── Overlay Layers ── */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+/* 1 — Base black overlay */
+.hero__overlay--base {
+  background: rgba(5, 5, 5, 0.55);
+}
+
+/* 2 — Left gradient for text readability */
+.hero__overlay--gradient {
+  background: linear-gradient(
+    to right,
+    rgba(5, 5, 5, 0.92) 0%,
+    rgba(5, 5, 5, 0.75) 30%,
+    rgba(5, 5, 5, 0.35) 55%,
+    rgba(5, 5, 5, 0.15) 75%,
+    transparent 100%
+  );
+}
+
+/* 3 — Bottom vignette */
+.hero__overlay--vignette {
+  background: linear-gradient(
+    to top,
+    rgba(5, 5, 5, 0.95) 0%,
+    rgba(5, 5, 5, 0.4) 25%,
+    transparent 50%
+  );
+}
+
+/* 4 — Subtle radial glow */
+.hero__overlay--radial {
+  background: radial-gradient(
+    ellipse 80% 60% at 20% 80%,
+    rgba(216, 240, 0, 0.015) 0%,
+    transparent 70%
+  );
+}
+
+/* 5 — Noise/grain texture */
+.hero__overlay--noise {
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  mix-blend-mode: overlay;
+}
+
+/* ── Watermark "CLEANER" ── */
+.hero__watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: var(--z-watermark);
+  pointer-events: none;
+  user-select: none;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero__watermark-text {
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 22vw, 22rem);
+  line-height: 0.85;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.04);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+/* ── Content ── */
+.hero__content {
+  position: relative;
+  z-index: var(--z-content);
+  width: 100%;
+  padding: var(--space-12) var(--container-padding) var(--space-10);
+}
+
+.hero__content-inner {
+  max-width: 600px;
+}
+
+/* ── Section Label ── */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.section-label__line {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--color-lime);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* ── Headline ── */
+.hero__headline {
+  margin-bottom: var(--space-6);
+}
+
+.hero__headline-safer {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 14vw, 10rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  color: var(--color-lime);
+}
+
+.hero__headline-kitchens {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 14vw, 10rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  color: var(--color-white);
+}
+
+.hero__headline-dot {
+  color: var(--color-lime);
+}
+
+/* ── Description ── */
+.hero__description {
+  margin-bottom: var(--space-7);
+  max-width: 380px;
+}
+
+/* ── CTA ── */
+.hero__cta {
+  margin-bottom: var(--space-6);
+}
+
+/* ── Quote Button Styles ── */
+.quote-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--color-lime);
+  border-radius: var(--radius-pill);
+  background: rgba(216, 240, 0, 0.04);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+  animation: pulseGlow 4s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+.quote-btn:hover {
+  background: rgba(216, 240, 0, 0.08);
+  box-shadow: var(--glow-lime-hover);
+}
+
+.quote-btn:hover .quote-btn__arrow {
+  transform: translateX(6px);
+}
+
+.quote-btn:active {
+  transform: scale(0.97);
+}
+
+.quote-btn__arrow {
+  font-size: 1.1em;
+  color: var(--color-lime);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.quote-btn--compact {
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.75rem;
+  gap: var(--space-2);
+  animation: none;
+}
+
+.quote-btn--compact .quote-btn__text {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+
+/* ── Decorative Rule ── */
+.hero__rule {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, var(--color-lime), transparent);
+  opacity: 0.4;
+}
+
+/* ── Scroll Indicator ── */
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--container-padding);
+  z-index: var(--z-content);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.hero__scroll-line {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--color-lime), transparent);
+  opacity: 0.5;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 0.6; transform: scaleY(1.15); }
+}
+
+.hero__scroll-text {
+  color: var(--color-muted);
+  font-size: 0.625rem;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.2em;
+  opacity: 0.5;
+}
+
+/* ================================================
+   Responsive — Tablet
+   ================================================ */
+@media (min-width: 768px) {
+  .hero {
+    align-items: center;
+  }
+
+  .hero__content {
+    padding: var(--space-12) var(--container-padding);
+  }
+
+  .hero__bg-image {
+    object-position: 60% center;
+  }
+
+  .hero__scroll {
+    display: flex;
+  }
+}
+
+/* ================================================
+   Responsive — Desktop
+   ================================================ */
+@media (min-width: 1024px) {
+  .hero__content {
+    padding: 0 var(--container-padding);
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .hero__content-inner {
+    max-width: 550px;
+    padding-top: var(--space-8);
+  }
+
+  .hero__headline-safer,
+  .hero__headline-kitchens {
+    font-size: clamp(6rem, 10vw, 9rem);
+  }
+
+  .hero__bg-image {
+    object-position: 55% center;
+  }
+
+  .hero__overlay--gradient {
+    background: linear-gradient(
+      to right,
+      rgba(5, 5, 5, 0.95) 0%,
+      rgba(5, 5, 5, 0.8) 25%,
+      rgba(5, 5, 5, 0.4) 50%,
+      rgba(5, 5, 5, 0.1) 70%,
+      transparent 100%
+    );
+  }
+}
+
+/* ================================================
+   Responsive — Large Desktop
+   ================================================ */
+@media (min-width: 1440px) {
+  .hero__content-inner {
+    max-width: 600px;
+  }
+
+  .hero__headline-safer,
+  .hero__headline-kitchens {
+    font-size: 9.5rem;
+  }
+
+  .hero__watermark-text {
+    font-size: 20rem;
+  }
+}
+
+/* ================================================
+   Responsive — Small Mobile
+   ================================================ */
+@media (max-width: 430px) {
+  .hero {
+    align-items: flex-end;
+  }
+
+  .hero__content {
+    padding: 0 var(--space-5) var(--space-8);
+  }
+
+  .hero__content-inner {
+    text-align: left;
+  }
+
+  .hero__headline-safer,
+  .hero__headline-kitchens {
+    font-size: clamp(3.5rem, 16vw, 5rem);
+  }
+
+  .hero__description {
+    font-size: 0.875rem;
+  }
+
+  .hero__description br {
+    display: none;
+  }
+
+  .hero__bg-image {
+    object-position: 70% center;
+  }
+
+  .hero__overlay--gradient {
+    background: linear-gradient(
+      to top,
+      rgba(5, 5, 5, 0.95) 0%,
+      rgba(5, 5, 5, 0.7) 40%,
+      rgba(5, 5, 5, 0.4) 60%,
+      rgba(5, 5, 5, 0.3) 100%
+    );
+  }
+
+  .section-label {
+    margin-bottom: var(--space-4);
+  }
+
+  .hero__watermark-text {
+    font-size: 5.5rem;
+  }
+}
+
+/* ================================================
+   Responsive — Very Small (360px)
+   ================================================ */
+@media (max-width: 375px) {
+  .hero__headline-safer,
+  .hero__headline-kitchens {
+    font-size: 3.25rem;
+  }
+
+  .hero__watermark-text {
+    font-size: 4.5rem;
+  }
+}
