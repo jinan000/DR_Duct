@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import type { FormEvent } from 'react';
 import { useInView } from '../../hooks/useInView';
 import QuoteButton from '../ui/QuoteButton';
 import './Contact.css';

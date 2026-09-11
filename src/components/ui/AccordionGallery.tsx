@@ -1,4 +1,5 @@
-import { useRef, useEffect, useState, useCallback, KeyboardEvent, MouseEvent as ReactMouseEvent } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
+import type { KeyboardEvent, MouseEvent as ReactMouseEvent } from 'react';
 import { gsap } from 'gsap';
 
 import './AccordionGallery.css';
