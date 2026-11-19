@@ -30,7 +30,9 @@
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
-  opacity: 1; /* Fully visible */
+  opacity: 1;
+  filter: brightness(0.9); /* Subtly softened brightness for enhanced contrast */
+  transition: filter var(--duration-normal) var(--ease-out);
 }
 
 .about__bg-overlay {
@@ -39,10 +41,12 @@
   background: linear-gradient(
     to bottom,
     var(--color-black) 0%,
-    rgba(5, 5, 5, 0) 15%,
-    rgba(5, 5, 5, 0) 85%,
+    rgba(0, 0, 0, 0.25) 15%,
+    rgba(0, 0, 0, 0.28) 50%,
+    rgba(0, 0, 0, 0.25) 85%,
     var(--color-black) 100%
   );
+  pointer-events: none;
 }
 
 .about__container {
