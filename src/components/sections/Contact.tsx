@@ -169,8 +169,8 @@ export default function Contact() {
 
             <div className="form-group form-group--full">
               <label htmlFor="serviceRequired" className="form-label">Service Required</label>
-              <select id="serviceRequired" className="form-select" required>
-                <option value="" disabled selected>Select a service...</option>
+              <select id="serviceRequired" className="form-select" defaultValue="" required>
+                <option value="" disabled>Select a service...</option>
                 <option value="kitchen">Kitchen Deep Cleaning Services</option>
                 <option value="duct">Duct Cleaning Services</option>
                 <option value="damper">Fire Damper Inspection / Service</option>
