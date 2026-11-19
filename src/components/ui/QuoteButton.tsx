@@ -10,7 +10,7 @@ interface QuoteButtonProps {
 }
 
 export default function QuoteButton({
-  label = 'GET A QUOTE',
+  label = 'BOOK AN APPOINTMENT',
   onClick,
   className = '',
   style,

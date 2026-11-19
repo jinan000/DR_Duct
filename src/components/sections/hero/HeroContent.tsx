@@ -54,7 +54,7 @@ const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
 
           {/* Supporting copy */}
           <p className="hero__description text-body">
-            A cleaner, safer future<br />
+            A cleaner, safer future <br />
             for your kitchen.
           </p>
 

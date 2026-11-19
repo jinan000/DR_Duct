@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import QuoteButton from '../ui/QuoteButton';
 import MobileMenu from './MobileMenu';
 import logo from '../../assets/images/logo.png';
 import './Header.css';
@@ -59,11 +58,6 @@ export default function Header() {
               ))}
             </ul>
           </nav>
-
-          {/* Desktop CTA */}
-          <div className="header__cta">
-            <QuoteButton id="header-quote-btn" label="CONTACT" compact />
-          </div>
 
           {/* Mobile: Hamburger Button */}
           <div className="header__mobile-actions">

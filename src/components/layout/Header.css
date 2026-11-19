@@ -132,29 +132,6 @@
   transform: scaleX(1);
 }
 
-/* ── Desktop CTA ── */
-.header__cta {
-  display: none;
-}
-
-.header__cta .quote-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.65rem 1.6rem;
-  font-size: 0.95rem;
-  border-radius: 999px;
-  transition: all var(--duration-fast) var(--ease-out);
-}
-
-.header__cta .quote-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.header__cta .quote-btn__arrow {
-  display: none; /* Hide arrow to match reference */
-}
-
 /* ── Mobile Actions ── */
 .header__mobile-actions {
   display: flex;
@@ -203,10 +180,6 @@
 /* ── Responsive ── */
 @media (min-width: 1024px) {
   .header__nav {
-    display: block;
-  }
-
-  .header__cta {
     display: block;
   }
 
