@@ -148,6 +148,26 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: auto;
+  overflow: visible;
   z-index: 1;
+}
+
+/* ── Mobile and Touch Optimizations ── */
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+  .border-glow-card {
+    touch-action: pan-y;
+    transform: none; /* Prevent fighting with translateY in-view animations */
+  }
+
+  .border-glow-inner {
+    overflow: visible !important; /* Eliminate nested scroll container traps */
+    touch-action: pan-y;
+  }
+
+  /* Disable heavy 28-layer gradient mesh and multi-box-shadow shaders during mobile touch scroll */
+  .border-glow-card::before,
+  .border-glow-card::after,
+  .border-glow-card > .edge-light {
+    display: none !important;
+  }
 }

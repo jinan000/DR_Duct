@@ -43,7 +43,7 @@ const GearIcon = () => (
 
 export default function About() {
   const contentView = useInView({ threshold: 0.1 });
-  const panelView = useInView({ threshold: 0.1 });
+  const panelView = useInView({ threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const visualRef = useRef<HTMLDivElement>(null);

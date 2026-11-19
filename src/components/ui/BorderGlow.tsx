@@ -132,6 +132,9 @@ const BorderGlow = ({
   }, [getCenterOfElement]);
 
   const handlePointerMove = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
+    // Disable on touch devices or screens < 1024px to prevent synchronous getBoundingClientRect layout reflow during mobile scrolling
+    if (e.pointerType === 'touch' || (typeof window !== 'undefined' && window.innerWidth < 1024)) return;
+
     const card = cardRef.current;
     if (!card) return;
 
@@ -148,6 +151,11 @@ const BorderGlow = ({
 
   useEffect(() => {
     if (!animated || !cardRef.current) return;
+    // On mobile devices (< 1024px) or if reduced motion is preferred, skip rAF animation loops
+    if (typeof window !== 'undefined' && (window.innerWidth < 1024 || window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      return;
+    }
+
     const card = cardRef.current;
     const angleStart = 110;
     const angleEnd = 465;

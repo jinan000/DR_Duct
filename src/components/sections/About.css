@@ -464,6 +464,34 @@
 
   .about__panel {
     padding: var(--space-6);
+    touch-action: pan-y;
+    contain: paint layout;
+  }
+
+  /* Commitment subsection mobile optimizations */
+  .about__panel.reveal-up {
+    transition: opacity 450ms ease, transform 450ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+
+  .about__panel .about__pillar.reveal-up {
+    transition: opacity 400ms ease, transform 400ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+
+  /* Compress stagger delays so cards don't feel delayed or frozen */
+  .about__panel .delay-300 { transition-delay: 80ms; }
+  .about__panel .delay-400 { transition-delay: 130ms; }
+  .about__panel .delay-500 { transition-delay: 180ms; }
+  .about__panel .delay-600 { transition-delay: 230ms; }
+  .about__panel .delay-700 { transition-delay: 280ms; }
+
+  /* Disable hover transform on touch devices to prevent sticky scroll states */
+  .about__pillar:hover {
+    transform: none;
+  }
+
+  /* Smooth SVG stroke-dashoffset */
+  .about__pillar-icon-detail {
+    transition: stroke-dashoffset 400ms ease 150ms;
   }
 }
 
