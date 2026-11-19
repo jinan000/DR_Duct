@@ -66,24 +66,30 @@
 
 @media (max-width: 768px) {
   .team-section {
-    padding: 3.5rem 0;
+    padding: 3.25rem 0;
   }
   
   .team__header {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .team__carousel-wrap {
-    height: 380px;
+    height: 295px;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .team-section {
-    padding: 3rem 0;
+    padding: 2.75rem 0;
+  }
+
+  .team__header {
+    margin-bottom: 1.25rem;
   }
 
   .team__carousel-wrap {
-    height: 340px;
+    height: 265px;
+    max-width: 100%;
   }
 }

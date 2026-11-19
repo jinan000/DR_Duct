@@ -44,6 +44,14 @@
   color: var(--color-lime, #D8F000);
 }
 
+@media (max-width: 768px) {
+  .flex-carousel__caption {
+    top: calc(50% + var(--flex-carousel-half) * var(--flex-carousel-lift, 1) + 12px);
+    gap: 4px;
+    padding: 0 12px;
+  }
+}
+
 .flex-carousel__title {
   display: flex;
   flex-direction: column;
