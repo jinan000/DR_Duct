@@ -53,6 +53,7 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
 
   useEffect(() => {
     if (prefersReducedMotion || !preloaderDone) return;
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
     const section = sectionRef.current;
     const wrapper = section?.querySelector('.hero__hood-wrapper') as HTMLElement;
     if (!wrapper) return;
@@ -321,8 +322,8 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
 
         // Parallax 2 (Left Cloud) — symmetrical upward & outward drift
         gsap.to('.hero__parallax-2', {
-          y: isMobile ? '-15vh' : '-25vh',
-          x: isMobile ? '-8vw' : '-12vw',
+          y: isMobile ? '-10vh' : '-25vh',
+          x: isMobile ? '-3vw' : '-12vw',
           ease: 'none',
           scrollTrigger: {
             trigger: section,
@@ -334,8 +335,8 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
 
         // Parallax 3 (Right Cloud) — symmetrical upward & outward drift
         gsap.to('.hero__parallax-3', {
-          y: isMobile ? '-15vh' : '-25vh',
-          x: isMobile ? '8vw' : '12vw',
+          y: isMobile ? '-10vh' : '-25vh',
+          x: isMobile ? '3vw' : '12vw',
           ease: 'none',
           scrollTrigger: {
             trigger: section,

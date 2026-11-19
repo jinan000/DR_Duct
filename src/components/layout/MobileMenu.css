@@ -37,24 +37,66 @@
   width: 100%;
   max-width: 420px;
   background: var(--color-black);
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
   transform: translateX(100%);
   transition: transform var(--duration-slow) var(--ease-out);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  padding: max(1.25rem, env(safe-area-inset-top, 1.25rem)) var(--space-6) max(2rem, env(safe-area-inset-bottom, 2rem));
+  box-shadow: -15px 0 45px rgba(0, 0, 0, 0.8);
 }
 
 .mobile-menu--open .mobile-menu__panel {
   transform: translateX(0);
 }
 
+/* ── Top Header inside Drawer ── */
+.mobile-menu__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: var(--space-6);
+}
+
+.mobile-menu__logo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+.mobile-menu__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--color-white);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.mobile-menu__close:hover {
+  background: rgba(216, 240, 0, 0.15);
+  border-color: var(--color-lime);
+  color: var(--color-lime);
+}
+
 /* ── Nav ── */
 .mobile-menu__nav {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 100%;
-  padding: var(--space-12) var(--space-8) var(--space-8);
+  flex: 1;
+  justify-content: space-between;
+  padding: 0;
 }
 
 .mobile-menu__list {
@@ -134,15 +176,31 @@
   transform: translateX(30px);
 }
 
+.mobile-menu__cta .quote-btn {
+  width: 100%;
+  min-height: 52px;
+  font-size: 0.9375rem;
+  letter-spacing: 0.12em;
+}
+
 .mobile-menu--open .mobile-menu__cta {
   animation: fadeInLeft var(--duration-slow) var(--ease-out) forwards;
 }
 
 /* ── Footer ── */
 .mobile-menu__footer {
-  margin-top: var(--space-9);
+  margin-top: var(--space-8);
   opacity: 0;
   transform: translateX(30px);
+}
+
+.mobile-menu__phone {
+  display: inline-block;
+  color: var(--color-lime);
+  margin-top: var(--space-2);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.05em;
 }
 
 .mobile-menu--open .mobile-menu__footer {

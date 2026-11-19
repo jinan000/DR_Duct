@@ -25,9 +25,9 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 -1px 0 rgba(0, 0, 0, 0.5);
   width: 100%;
-  margin: 40px 0;
-  border-radius: 24px;
-  padding: 4rem 5rem;
+  margin: clamp(20px, 3vw, 40px) 0;
+  border-radius: clamp(14px, 2.5vw, 24px);
+  padding: clamp(2rem, 4vw, 4rem) clamp(2rem, 4.5vw, 5rem);
   box-sizing: border-box;
   /* Improve mobile performance */
   -webkit-transform: translateZ(0);
@@ -36,6 +36,29 @@
   background-color: #111111;
   border: 1px solid rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(20px);
+}
+
+@media (max-width: 1024px) {
+  .scroll-stack-card {
+    padding: 2.25rem 1.75rem;
+    margin: 24px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .scroll-stack-card {
+    padding: 1.5rem 1.25rem;
+    margin: 18px 0;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-stack-card {
+    padding: 1.25rem 1rem;
+    margin: 14px 0;
+    border-radius: 14px;
+  }
 }
 
 .scroll-stack-end {

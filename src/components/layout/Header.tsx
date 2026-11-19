@@ -65,14 +65,8 @@ export default function Header() {
             <QuoteButton id="header-quote-btn" label="CONTACT" compact />
           </div>
 
-          {/* Mobile: Compact Quote + Hamburger */}
+          {/* Mobile: Hamburger Button */}
           <div className="header__mobile-actions">
-            <QuoteButton
-              id="mobile-header-quote-btn"
-              label="GET A QUOTE"
-              compact
-              className="header__mobile-quote"
-            />
             <button
               id="hamburger-btn"
               className={`hamburger ${menuOpen ? 'hamburger--active' : ''}`}

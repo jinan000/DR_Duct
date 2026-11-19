@@ -21,6 +21,13 @@
   padding: var(--space-11) 0;
 }
 
+@media (max-width: 768px) {
+  .contact-hero {
+    min-height: 42svh;
+    padding: var(--space-8) 0;
+  }
+}
+
 .contact-hero__bg {
   position: absolute;
   inset: 0;
@@ -385,11 +392,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: var(--space-6) var(--space-4);
 }
 
 @media (max-width: 1023px) {
   .contact-map {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-map {
+    aspect-ratio: auto;
+    min-height: 310px;
+    padding: var(--space-8) var(--space-4);
   }
 }
 
@@ -538,6 +554,7 @@
 @media (max-width: 767px) {
   .contact-heading {
     text-align: center;
+    font-size: clamp(2.2rem, 7.5vw, 3.5rem);
   }
   .contact-hero__content {
     align-items: center;
@@ -548,6 +565,38 @@
   }
   .contact-subtitle {
     text-align: center;
+    font-size: clamp(0.875rem, 3.2vw, 1rem);
+  }
+  .contact-main {
+    padding: var(--space-6) var(--container-padding);
+    gap: var(--space-7);
+  }
+  .contact-info__heading {
+    font-size: clamp(1.85rem, 6vw, 2.5rem);
+  }
+  .form-heading {
+    font-size: clamp(1.85rem, 6vw, 2.5rem);
+  }
+  .contact-item {
+    padding: var(--space-4) 0;
+  }
+  .contact-item__value {
+    font-size: 1rem;
+  }
+  .contact-final-cta {
+    padding: var(--space-8) var(--container-padding);
+  }
+  .contact-final-cta__heading {
+    font-size: clamp(1.85rem, 6.5vw, 3rem);
+  }
+  .contact-final-cta__desc {
+    font-size: 1rem;
+    margin-bottom: var(--space-6);
+  }
+  .contact-final-cta .quote-btn {
+    width: 100%;
+    max-width: 360px;
+    justify-content: center;
   }
 }
 

@@ -65,6 +65,31 @@
   align-items: center;
 }
 
+@media (max-width: 768px) {
+  .services-section {
+    padding: var(--space-8) 0;
+  }
+
+  .services-header {
+    margin-bottom: var(--space-6);
+  }
+
+  .services-title {
+    font-size: clamp(1.85rem, 6.5vw, 3rem);
+  }
+
+  .services-cta-wrap {
+    margin-top: var(--space-6);
+    justify-content: flex-start;
+  }
+
+  .services-cta-wrap .quote-btn {
+    width: 100%;
+    max-width: 380px;
+    justify-content: center;
+  }
+}
+
 /* ── Animation Classes ── */
 .anim-reveal {
   opacity: 0;

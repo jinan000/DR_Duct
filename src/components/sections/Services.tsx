@@ -122,7 +122,7 @@ export default function Services() {
 
         {/* Global CTA for section */}
         <div className={`services-cta-wrap anim-reveal delay-600 ${sectionInView ? 'is-visible' : ''}`}>
-           <QuoteButton id="services-quote-btn" label="EXPLORE OUR SERVICES →" />
+           <QuoteButton id="services-quote-btn" label="EXPLORE OUR SERVICES" />
         </div>
 
       </div>

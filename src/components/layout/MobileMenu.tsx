@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import QuoteButton from '../ui/QuoteButton';
+import logo from '../../assets/images/logo.png';
 import './MobileMenu.css';
 
 interface NavItem {
@@ -38,6 +39,14 @@ export default function MobileMenu({ isOpen, onClose, navItems }: MobileMenuProp
     return () => window.removeEventListener('keydown', handleEsc);
   }, [isOpen, onClose]);
 
+  const handleQuoteClick = () => {
+    onClose();
+    const contact = document.getElementById('contact');
+    if (contact) {
+      contact.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div
       id="mobile-nav-menu"
@@ -50,13 +59,26 @@ export default function MobileMenu({ isOpen, onClose, navItems }: MobileMenuProp
       <div className="mobile-menu__backdrop" onClick={onClose} aria-hidden="true" />
 
       <div className="mobile-menu__panel">
+        {/* Header inside drawer */}
+        <div className="mobile-menu__top">
+          <img src={logo} alt="DR. DUCT UK LTD Logo" className="mobile-menu__logo" />
+          <button
+            type="button"
+            className="mobile-menu__close"
+            onClick={onClose}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+        </div>
+
         <nav className="mobile-menu__nav" aria-label="Mobile navigation">
           <ul className="mobile-menu__list">
             {navItems.map((item, index) => (
               <li
                 key={item.label}
                 className="mobile-menu__item"
-                style={{ animationDelay: `${150 + index * 80}ms` }}
+                style={{ animationDelay: `${150 + index * 60}ms` }}
               >
                 <a
                   href={item.href}
@@ -71,14 +93,18 @@ export default function MobileMenu({ isOpen, onClose, navItems }: MobileMenuProp
             ))}
           </ul>
 
-          <div className="mobile-menu__cta" style={{ animationDelay: '550ms' }}>
-            <QuoteButton id="mobile-menu-quote-btn" onClick={onClose} />
+          <div className="mobile-menu__cta" style={{ animationDelay: '450ms' }}>
+            <QuoteButton
+              id="mobile-menu-quote-btn"
+              label="BOOK AN APPOINTMENT"
+              onClick={handleQuoteClick}
+            />
           </div>
 
-          <div className="mobile-menu__footer" style={{ animationDelay: '650ms' }}>
+          <div className="mobile-menu__footer" style={{ animationDelay: '550ms' }}>
             <div className="mobile-menu__footer-line" />
             <p className="text-body-sm">Kitchen Extract &amp; Duct Cleaning Specialists</p>
-            <p className="text-body-sm" style={{ opacity: 0.5 }}>+44 20 4526 4142</p>
+            <a href="tel:+442045264142" className="mobile-menu__phone text-body-sm">+44 20 4526 4142</a>
           </div>
         </nav>
       </div>
