@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       {loading && <Preloader onComplete={handlePreloaderComplete} />}
-      <Home />
+      <Home preloaderDone={!loading} />
     </>
   );
 }

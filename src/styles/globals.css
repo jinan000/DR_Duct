@@ -29,16 +29,16 @@
   --space-2: 0.5rem;    /* 8px */
   --space-3: 0.75rem;   /* 12px */
   --space-4: 1rem;      /* 16px */
-  --space-5: 1.5rem;    /* 24px */
-  --space-6: 2rem;      /* 32px */
-  --space-7: 2.5rem;    /* 40px */
-  --space-8: 3rem;      /* 48px */
-  --space-9: 4rem;      /* 64px */
-  --space-10: 5rem;     /* 80px */
-  --space-11: 6rem;     /* 96px */
-  --space-12: 8rem;     /* 128px */
-  --space-14: 10rem;    /* 160px */
-  --space-16: 12rem;    /* 192px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.75rem;   /* 28px */
+  --space-7: 2.25rem;   /* 36px */
+  --space-8: 2.75rem;   /* 44px */
+  --space-9: 3.25rem;   /* 52px */
+  --space-10: 4rem;     /* 64px */
+  --space-11: 4.75rem;  /* 76px */
+  --space-12: 5.75rem;  /* 92px */
+  --space-14: 6.75rem;  /* 108px */
+  --space-16: 8rem;     /* 128px */
 
   /* ── Border Radius ── */
   --radius-sm: 4px;
@@ -55,8 +55,8 @@
   --duration-cinematic: 800ms;
 
   /* ── Container ── */
-  --container-max: 1400px;
-  --container-padding: clamp(1.25rem, 5vw, 4rem);
+  --container-max: 1340px;
+  --container-padding: clamp(1.25rem, 3.8vw, 3.25rem);
 
   /* ── Z-Index Scale ── */
   --z-base: 0;

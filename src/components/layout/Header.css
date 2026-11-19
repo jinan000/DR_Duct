@@ -4,32 +4,32 @@
 
 .header {
   position: fixed;
-  top: 1.5rem;
+  top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 95%;
-  max-width: 1200px;
+  width: 92%;
+  max-width: 1160px;
   z-index: var(--z-header);
-  padding: 0.75rem 1.5rem;
-  border-radius: 16px;
-  background-color: rgba(10, 10, 10, 0.4);
+  padding: 0.4rem 1.25rem;
+  border-radius: 12px;
+  background-color: rgba(10, 10, 10, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 15px 35px rgba(0, 0, 0, 0.5),
     0 1px 3px rgba(0, 0, 0, 0.8),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transition: all var(--duration-normal) var(--ease-out);
 }
 
 .header--scrolled {
-  background-color: rgba(5, 5, 5, 0.85);
+  background-color: rgba(5, 5, 5, 0.88);
   border-color: rgba(255, 255, 255, 0.15);
   border-top-color: rgba(255, 255, 255, 0.25);
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.7),
+    0 20px 40px rgba(0, 0, 0, 0.7),
     0 4px 10px rgba(0, 0, 0, 0.9),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
@@ -39,7 +39,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 }
 
 /* ── Logo ── */
@@ -55,7 +55,7 @@
 }
 
 .header__logo-image {
-  height: 50px;
+  height: 48px;
   width: auto;
   object-fit: contain;
 }
@@ -67,16 +67,16 @@
 
 .header__nav-list {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: center;
 }
 
 .header__nav-link {
   position: relative;
-  padding: 0.5rem 0;
+  padding: 0.35rem 0;
   color: var(--color-muted);
-  font-size: 1rem;
-  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
   transition: color var(--duration-fast) var(--ease-out);
 }
 
@@ -117,8 +117,8 @@
 .header__cta .quote-btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.6rem 1.5rem;
-  font-size: 0.9375rem;
+  padding: 0.65rem 1.6rem;
+  font-size: 0.95rem;
   border-radius: 999px;
   transition: all var(--duration-fast) var(--ease-out);
 }

@@ -1,0 +1,82 @@
+/* ================================================
+   SECTION SEPARATOR — Cinematic Torn Transition
+   ================================================ */
+
+.section-separator {
+  position: relative;
+  width: 100%;
+  height: 0; /* Let it float as a continuous overlay without disrupting layout heavily */
+  z-index: 20; 
+  pointer-events: none;
+  overflow: visible; /* Must be visible to overlap continuously */
+}
+
+.section-separator__bg {
+  display: none; /* Moved to Hero section */
+}
+
+.section-separator__wrapper {
+  position: absolute;
+  top: -80px; /* Pull it up continuously into the previous section */
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.section-separator__img {
+  width: 100%;
+  height: clamp(150px, 20vw, 300px); /* Keeps it small but not squished */
+  object-fit: cover; 
+  object-position: center; 
+  display: block;
+  transform-origin: top center;
+  will-change: transform;
+  /* Luxurious deep shadow */
+  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.9));
+  
+  /* Fade out BOTH the top and bottom to transparent so the background of the image never creates a harsh rectangular border */
+  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+/* ── SMOKE & ATMOSPHERE ── */
+.section-separator__smoke {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(216, 240, 0, 0.03) 0%, transparent 60%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── FINE DUST / PARTICLES (Grain) ── */
+.section-separator__dust {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* ── RESPONSIVE — MOBILE ── */
+@media (max-width: 768px) {
+  .section-separator__img {
+    /* Limit the height on mobile so it doesn't cover too much of the next section */
+    height: 120px;
+    object-fit: cover;
+    object-position: top center;
+  }
+}
+
+@media (max-width: 430px) {
+  .section-separator__img {
+    height: 90px;
+  }
+}

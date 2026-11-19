@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useInView } from '../../hooks/useInView';
-import QuoteButton from '../ui/QuoteButton';
 import ScrollStack, { ScrollStackItem } from '../ui/ScrollStack';
+// @ts-ignore
+import FolderFloat from '../ui/FolderFloat';
+import CountUp from '../ui/CountUp';
+import TextType from '../ui/TextType';
 import './Industries.css';
 
 import heroImg from '../../assets/images/industry_hero.png';
@@ -105,7 +108,6 @@ export default function Industries() {
   const { ref: ind4Ref, isInView: ind4InView } = useInView({ threshold: 0.15 });
   const { ref: metricsRef, isInView: metricsInView } = useInView({ threshold: 0.2 });
   const { ref: statementRef, isInView: statementInView } = useInView({ threshold: 0.3 });
-  const { ref: ctaRef, isInView: ctaInView } = useInView({ threshold: 0.2 });
 
   const indRefs = [ind1Ref, ind2Ref, ind3Ref, ind4Ref];
   const indInViews = [ind1InView, ind2InView, ind3InView, ind4InView];
@@ -148,15 +150,47 @@ export default function Industries() {
         ref={introRef} 
         className={`industries-intro ${introInView ? 'is-visible' : ''}`}
       >
-        <span className="industries-intro__eyebrow label label-lime anim-fade-in-up">
-          INDUSTRIES WE SPECIALISE IN
-        </span>
-        <h2 className="industries-intro__title h1 anim-fade-in-up delay-200">
-          ONE STANDARD.<br />DIFFERENT ENVIRONMENTS.
-        </h2>
-        <p className="industries-intro__desc text-body anim-fade-in-up delay-400">
-          From high-volume commercial kitchens to healthcare and industrial facilities, Dr. Duct delivers specialist cleaning designed around the demands of each environment.
-        </p>
+        <div className="industries-intro__text">
+          <span className="industries-intro__eyebrow label label-lime anim-fade-in-up">
+            INDUSTRIES WE SPECIALISE IN
+          </span>
+          <h2 className="industries-intro__title h1 anim-fade-in-up delay-200">
+            ONE STANDARD.<br />DIFFERENT ENVIRONMENTS.
+          </h2>
+          <p className="industries-intro__desc text-body anim-fade-in-up delay-400">
+            From high-volume commercial kitchens to healthcare and industrial facilities, Dr. Duct delivers specialist cleaning designed around the demands of each environment.
+          </p>
+        </div>
+
+        <div className="industries-intro__folder anim-fade-in-up delay-600">
+          <FolderFloat
+            items={[
+              'Restaurants',
+              'Hotels',
+              'Hospitals',
+              'Manufacturing',
+              'Schools',
+              'Retail'
+            ]}
+            label="Industries"
+            sublabel="We serve"
+            trigger="hover"
+            folderColor="#1a1a1a"
+            frontColor="#222222"
+            paperColor="#D8F000"
+            itemColor="#D8F000"
+            itemTextColor="#050505"
+            labelColor="#F5F5F5"
+            width={220}
+            height={160}
+            spread={200}
+            lift={30}
+            tilt={6}
+            bounce={0.4}
+            physics={true}
+            drift={0.6}
+          />
+        </div>
       </div>
 
       {/* ── LISTING ── */}
@@ -203,28 +237,28 @@ export default function Industries() {
           
           <div className="industries-metrics__grid">
             <div className="metric-item">
-              <div className="metric-item__value">500+</div>
+              <div className="metric-item__value"><CountUp end={500} suffix="+" /></div>
               <div className="metric-item__label label">CLIENTS SERVED</div>
               <p className="metric-item__desc text-body-sm">
                 Across a wide range of industries in the UK.
               </p>
             </div>
             <div className="metric-item">
-              <div className="metric-item__value">10+</div>
+              <div className="metric-item__value"><CountUp end={10} suffix="+" /></div>
               <div className="metric-item__label label">YEARS EXPERIENCE</div>
               <p className="metric-item__desc text-body-sm">
                 Deep expertise in specialist extraction cleaning.
               </p>
             </div>
             <div className="metric-item">
-              <div className="metric-item__value">100%</div>
+              <div className="metric-item__value"><CountUp end={100} suffix="%" /></div>
               <div className="metric-item__label label">COMPLIANCE FOCUSED</div>
               <p className="metric-item__desc text-body-sm">
                 Meeting all TR19 and safety regulations.
               </p>
             </div>
             <div className="metric-item">
-              <div className="metric-item__value">24/7</div>
+              <div className="metric-item__value"><CountUp end={24} suffix="/7" /></div>
               <div className="metric-item__label label">SUPPORT</div>
               <p className="metric-item__desc text-body-sm">
                 Rapid response when your environment demands it.
@@ -237,23 +271,24 @@ export default function Industries() {
       {/* ── STATEMENT ── */}
       <div ref={statementRef} className={`industries-statement ${statementInView ? 'is-visible' : ''}`}>
         <h2>
-          EVERY ENVIRONMENT<br />HAS ITS DEMANDS.<br />
-          WE CLEAN<br />
-          <span className="text-lime">WITH PRECISION.</span>
+          <TextType
+            text={"EVERY ENVIRONMENT\nHAS ITS DEMANDS.\nWE CLEAN\nWITH PRECISION."}
+            typingSpeed={50}
+            loop={false}
+            startOnVisible={true}
+            cursorCharacter="_"
+            renderText={(text: string) => {
+              const splitStr = "EVERY ENVIRONMENT\nHAS ITS DEMANDS.\nWE CLEAN\n";
+              if (text.length <= splitStr.length) return text;
+              return (
+                <>
+                  {text.slice(0, splitStr.length)}
+                  <span className="text-lime">{text.slice(splitStr.length)}</span>
+                </>
+              );
+            }}
+          />
         </h2>
-      </div>
-
-      {/* ── CTA ── */}
-      <div ref={ctaRef} className={`industries-cta ${ctaInView ? 'is-visible' : ''}`}>
-        <div className="industries-cta__inner">
-          <h2 className="industries-cta__title h1">
-            YOUR INDUSTRY.<br />OUR EXPERTISE.
-          </h2>
-          <p className="industries-cta__desc text-body">
-            Talk to Dr. Duct about a cleaning programme designed around your environment.
-          </p>
-          <QuoteButton id="industries-cta-btn" label="GET A QUOTE →" />
-        </div>
       </div>
     </section>
   );

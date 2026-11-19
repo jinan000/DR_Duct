@@ -1,7 +1,13 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useInView } from '../../hooks/useInView';
 import heroImg from '../../assets/images/about-extraction-cinematic.png';
+import parallaxBg from '../../assets/images/parallax2fordiffereentiating.png';
 import BorderGlow from '../ui/BorderGlow';
 import './About.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ShieldIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="square" strokeLinejoin="miter" className="about__pillar-icon">
@@ -38,9 +44,76 @@ const GearIcon = () => (
 export default function About() {
   const contentView = useInView({ threshold: 0.1 });
   const panelView = useInView({ threshold: 0.1 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  // ── GSAP ScrollTrigger: Cinematic headline entrance + subtle image parallax ──
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      const isMobile = window.innerWidth < 768;
+
+      // Headline: slow cinematic reveal (opacity + translateY)
+      if (headlineRef.current) {
+        const headlineChildren = headlineRef.current.children;
+        gsap.fromTo(headlineChildren, 
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power2.out',
+            stagger: 0.15,
+            scrollTrigger: {
+              trigger: headlineRef.current,
+              start: 'top 85%',
+              end: 'top 50%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // Image: very subtle parallax depth (slightly different scroll speed)
+      if (visualRef.current && !isMobile) {
+        gsap.to(visualRef.current, {
+          yPercent: -4,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: visualRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
+
+
+
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="about" className="about" aria-label="About Us">
+    <section ref={sectionRef} id="about" className="about" aria-label="About Us">
+      {/* ── Background Image Layer ── */}
+      <div className="about__bg-wrapper" aria-hidden="true">
+        <div 
+          ref={bgRef}
+          className="about__bg-image" 
+          style={{ backgroundImage: `url(${parallaxBg})` }}
+        />
+        <div className="about__bg-overlay" />
+      </div>
+
       <div className="about__container">
         
         {/* Top Grid: Text Left, Image Right */}
@@ -53,11 +126,11 @@ export default function About() {
               ABOUT US
             </div>
             
-            <h2 className="about__headline">
-              <span className={`about__headline-clean reveal-up delay-100 ${contentView.isInView ? 'in-view' : ''}`}>
+            <h2 ref={headlineRef} className="about__headline">
+              <span className="about__headline-clean">
                 CLEAN SYSTEMS.
               </span>
-              <span className={`about__headline-safer reveal-up delay-150 ${contentView.isInView ? 'in-view' : ''}`}>
+              <span className="about__headline-safer">
                 SAFER ENVIRONMENTS.
               </span>
             </h2>
@@ -68,7 +141,7 @@ export default function About() {
           </div>
 
           {/* Right Image */}
-          <div className={`about__visual-col reveal-up delay-250 ${contentView.isInView ? 'in-view' : ''}`}>
+          <div ref={visualRef} className={`about__visual-col reveal-up delay-250 ${contentView.isInView ? 'in-view' : ''}`}>
             <div className="about__visual-wrapper">
               <img 
                 src={heroImg} 
