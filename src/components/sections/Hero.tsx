@@ -304,8 +304,9 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
     if (!section) return;
 
     // Wait for entrance animation to finish before applying scroll parallax
+    let ctx: gsap.Context | null = null;
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      ctx = gsap.context(() => {
         const isMobile = window.innerWidth < 768;
 
         // Background text moves slowest (deep background)
@@ -347,11 +348,12 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
         });
 
       }, section);
-
-      return () => ctx.revert();
     }, 5000); // Wait for entrance animation to fully settle
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      ctx?.revert();
+    };
   }, [prefersReducedMotion, preloaderDone]);
 
   return (

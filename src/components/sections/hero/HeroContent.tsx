@@ -4,6 +4,7 @@
    ================================================ */
 
 import React, { forwardRef } from 'react';
+import { useSmoothScroll } from '../../../context/SmoothScroll';
 
 interface HeroContentProps {
   className?: string;
@@ -11,21 +12,21 @@ interface HeroContentProps {
 
 const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
   ({ className = '' }, ref) => {
+    const { scrollTo } = useSmoothScroll();
+
     const handleBookingClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
-        // Set focus to the first input in the contact form after scrolling
-        setTimeout(() => {
-          const firstInput = contactSection.querySelector<HTMLInputElement>(
-            '#fullName, input:not([type="hidden"]), select, textarea'
-          );
-          if (firstInput) {
-            firstInput.focus({ preventScroll: true });
-          }
-        }, 650);
-      }
+      scrollTo('#contact', { offset: -40 });
+      // Set focus to the first input in the contact form after scrolling
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        const firstInput = contactSection?.querySelector<HTMLInputElement>(
+          '#fullName, input:not([type="hidden"]), select, textarea'
+        );
+        if (firstInput) {
+          firstInput.focus({ preventScroll: true });
+        }
+      }, 700);
     };
 
     return (

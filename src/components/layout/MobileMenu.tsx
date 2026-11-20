@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import QuoteButton from '../ui/QuoteButton';
 import logo from '../../assets/images/logo.png';
+import { useSmoothScroll } from '../../context/SmoothScroll';
 import './MobileMenu.css';
 
 interface NavItem {
@@ -16,17 +17,22 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose, navItems }: MobileMenuProps) {
-  // Lock body scroll when menu is open
+  const { scrollTo, stop, start } = useSmoothScroll();
+
+  // Lock body scroll and pause Lenis smoothly when menu is open
   useEffect(() => {
     if (isOpen) {
+      stop();
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      start();
     }
     return () => {
       document.body.style.overflow = '';
+      start();
     };
-  }, [isOpen]);
+  }, [isOpen, stop, start]);
 
   // Close on Escape
   useEffect(() => {
@@ -39,13 +45,21 @@ export default function MobileMenu({ isOpen, onClose, navItems }: MobileMenuProp
     return () => window.removeEventListener('keydown', handleEsc);
   }, [isOpen, onClose]);
 
-  const handleQuoteClick = () => {
+  const handleLinkClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     onClose();
-    const contact = document.getElementById('contact');
-    if (contact) {
-      contact.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+    // Allow drawer to start closing before executing smooth scroll
+    setTimeout(() => {
+      scrollTo(href, { offset: -60 });
+    }, 150);
+  }, [onClose, scrollTo]);
+
+  const handleQuoteClick = useCallback(() => {
+    onClose();
+    setTimeout(() => {
+      scrollTo('#contact', { offset: -40 });
+    }, 150);
+  }, [onClose, scrollTo]);
 
   return (
     <div
@@ -83,7 +97,7 @@ export default function MobileMenu({ isOpen, onClose, navItems }: MobileMenuProp
                 <a
                   href={item.href}
                   className={`mobile-menu__link ${item.active ? 'mobile-menu__link--active' : ''}`}
-                  onClick={onClose}
+                  onClick={(e) => handleLinkClick(e, item.href)}
                 >
                   <span className="mobile-menu__link-number">{String(index + 1).padStart(2, '0')}</span>
                   <span className="mobile-menu__link-text">{item.label}</span>

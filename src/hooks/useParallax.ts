@@ -127,7 +127,9 @@ export function useParallax() {
 
         const mouseX = mx * config.mouseIntensity;
         const mouseY = my * config.mouseIntensity * 0.6;
-        const scrollOffset = scrollY * -config.scrollFactor;
+        // On mobile touch viewports, rely cleanly on ScrollTrigger for scroll scrubbing to avoid competing transform loops
+        const scrollFactor = intensityMultiplierRef.current < 0.45 ? 0 : config.scrollFactor;
+        const scrollOffset = scrollY * -scrollFactor;
 
         qt.x(mouseX);
         qt.y(mouseY + scrollOffset);
