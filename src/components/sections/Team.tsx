@@ -2,7 +2,20 @@ import { useState, useEffect } from 'react';
 import { useInView } from '../../hooks/useInView';
 // @ts-ignore
 import FlexCarousel from '../ui/FlexCarousel';
+import specialist1 from '../../assets/images/specialist-1.webp';
+import specialist2 from '../../assets/images/specialist-2.webp';
+import specialist3 from '../../assets/images/specialist-3.webp';
+import specialist4 from '../../assets/images/specialist-4.webp';
+import specialist5 from '../../assets/images/specialist-5.webp';
 import './Team.css';
+
+const SPECIALIST_GALLERY_ITEMS = [
+  { src: specialist1, alt: 'Dr. Duct specialist cleaning stainless steel extraction canopy', title: 'Canopy Deep Cleaning' },
+  { src: specialist2, alt: 'Dr. Duct specialist inspecting commercial kitchen extract hood', title: 'Extraction Inspection' },
+  { src: specialist3, alt: 'Dr. Duct specialist detailing overhead ductwork and fire suppression lines', title: 'Overhead Pipework' },
+  { src: specialist4, alt: 'Dr. Duct specialist cleaning extraction plenum and baffle housings', title: 'Plenum & Baffle Care' },
+  { src: specialist5, alt: 'Dr. Duct specialist applying degreasing treatment to kitchen extract hood', title: 'Degreasing Treatment' },
+];
 
 export default function Team() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
@@ -46,6 +59,7 @@ export default function Team() {
 
       <div className={`team__carousel-wrap ${isInView ? 'is-visible' : ''}`}>
         <FlexCarousel
+          items={SPECIALIST_GALLERY_ITEMS}
           preset="liquid"
           intro="rise"
           cardHeight={cardHeight}
