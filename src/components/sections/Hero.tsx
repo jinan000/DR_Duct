@@ -311,7 +311,7 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
 
         // Background text moves slowest (deep background)
         gsap.to('.hero__bg-text-container', {
-          y: isMobile ? '-5vh' : '-10vh',
+          y: isMobile ? -18 : '-10vh',
           ease: 'none',
           scrollTrigger: {
             trigger: section,
@@ -323,8 +323,8 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
 
         // Parallax 2 (Left Cloud) — symmetrical upward & outward drift
         gsap.to('.hero__parallax-2', {
-          y: isMobile ? '-10vh' : '-25vh',
-          x: isMobile ? '-3vw' : '-12vw',
+          y: isMobile ? -24 : '-25vh',
+          x: isMobile ? -10 : '-12vw',
           ease: 'none',
           scrollTrigger: {
             trigger: section,
@@ -336,8 +336,8 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
 
         // Parallax 3 (Right Cloud) — symmetrical upward & outward drift
         gsap.to('.hero__parallax-3', {
-          y: isMobile ? '-10vh' : '-25vh',
-          x: isMobile ? '3vw' : '12vw',
+          y: isMobile ? -24 : '-25vh',
+          x: isMobile ? 10 : '12vw',
           ease: 'none',
           scrollTrigger: {
             trigger: section,
