@@ -602,8 +602,8 @@
   .hero__content {
     align-items: flex-end;
     padding: 0 var(--container-padding) clamp(1.75rem, 5vh, 2.75rem);
-    min-height: 100svh;
     min-height: 100vh;
+    min-height: 100svh;
   }
 
   .hero__parallax-wrapper {

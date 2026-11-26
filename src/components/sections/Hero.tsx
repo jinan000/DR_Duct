@@ -248,7 +248,7 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
 
   // ── Gentle idle sway — like hanging on chains in a breeze ──
   useEffect(() => {
-    if (!preloaderDone || prefersReducedMotion) return;
+    if (!preloaderDone || prefersReducedMotion || window.innerWidth < 768) return;
 
     // Apply idle animations to the inner hood element to avoid conflict with mouse wrapper
     const hood = hoodRef.current;
@@ -317,7 +317,7 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
             trigger: section,
             start: 'top top',
             end: 'bottom top',
-            scrub: true,
+            scrub: isMobile ? 1 : true,
           },
         });
 
@@ -330,7 +330,7 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
             trigger: section,
             start: 'top top',
             end: 'bottom top',
-            scrub: true,
+            scrub: isMobile ? 1 : true,
           },
         });
 
@@ -343,7 +343,7 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
             trigger: section,
             start: 'top top',
             end: 'bottom top',
-            scrub: true,
+            scrub: isMobile ? 1 : true,
           },
         });
 

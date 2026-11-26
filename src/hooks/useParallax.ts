@@ -112,6 +112,12 @@ export function useParallax() {
     if (prefersReducedMotion) return;
 
     const tick = () => {
+      // Stop running rAF work on mobile viewports (< 768px) where parallax intensity is 0
+      if (intensityMultiplierRef.current === 0) {
+        rafRef.current = 0;
+        return;
+      }
+
       if (!activeRef.current) {
         rafRef.current = requestAnimationFrame(tick);
         return;
@@ -138,8 +144,19 @@ export function useParallax() {
       rafRef.current = requestAnimationFrame(tick);
     };
 
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
+    const startIfDesktop = () => {
+      if (intensityMultiplierRef.current > 0 && !rafRef.current) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    startIfDesktop();
+    window.addEventListener('resize', startIfDesktop, { passive: true });
+    return () => {
+      window.removeEventListener('resize', startIfDesktop);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+    };
   }, [prefersReducedMotion]);
 
   return {

@@ -40,33 +40,46 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // 1. Initialize Lenis smooth scroll
-    const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      touchMultiplier: 1.0,
-      syncTouch: false, // Use native touch momentum on mobile touchscreens (no stutter, freezing, or jumping)
-      autoResize: true,
-    });
+    // Prevent ScrollTrigger from recalculating on mobile Safari address bar show/hide
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
-    lenisRef.current = lenis;
-    setLenisInstance(lenis);
+    const isMobile =
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+      (('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.innerWidth < 1024) ||
+      window.innerWidth < 768;
 
-    // Attach to window for global access/debugging
-    (window as unknown as { lenis?: Lenis }).lenis = lenis;
+    // 1. Initialize Lenis smooth scroll ONLY on desktop (native document scroll on mobile Safari)
+    let lenis: Lenis | null = null;
+    let tickerUpdate: ((time: number) => void) | null = null;
 
-    // 2. Synchronize GSAP ScrollTrigger with Lenis
-    lenis.on('scroll', ScrollTrigger.update);
+    if (!isMobile) {
+      lenis = new Lenis({
+        duration: 1.1,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        touchMultiplier: 1.0,
+        syncTouch: false,
+        autoResize: true,
+      });
 
-    // 3. Drive Lenis with GSAP's ticker for zero-jitter, unified 60 FPS animation frame loop
-    const tickerUpdate = (time: number) => {
-      lenis.raf(time * 1000);
-    };
-    gsap.ticker.add(tickerUpdate);
-    gsap.ticker.lagSmoothing(0);
+      lenisRef.current = lenis;
+      setLenisInstance(lenis);
+
+      // Attach to window for global access/debugging
+      (window as unknown as { lenis?: Lenis }).lenis = lenis;
+
+      // 2. Synchronize GSAP ScrollTrigger with Lenis
+      lenis.on('scroll', ScrollTrigger.update);
+
+      // 3. Drive Lenis with GSAP's ticker for zero-jitter, unified 60 FPS animation frame loop
+      tickerUpdate = (time: number) => {
+        lenis?.raf(time * 1000);
+      };
+      gsap.ticker.add(tickerUpdate);
+      gsap.ticker.lagSmoothing(0);
+    }
 
     // 4. Smooth anchor link interceptor
     const handleAnchorClick = (e: MouseEvent) => {
@@ -78,10 +91,15 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
         const targetEl = document.querySelector(href);
         if (targetEl) {
           e.preventDefault();
-          lenis.scrollTo(targetEl as HTMLElement, {
-            offset: -60,
-            duration: 1.2,
-          });
+          if (lenis) {
+            lenis.scrollTo(targetEl as HTMLElement, {
+              offset: -60,
+              duration: 1.2,
+            });
+          } else {
+            const top = targetEl.getBoundingClientRect().top + window.scrollY - 60;
+            window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+          }
         }
       }
     };
@@ -90,16 +108,22 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
     // 5. Window resize listener to keep ScrollTrigger and Lenis dimensions synced
     const handleResize = () => {
-      lenis.resize();
-      ScrollTrigger.refresh();
+      if (lenis) {
+        lenis.resize();
+        ScrollTrigger.refresh();
+      }
     };
     window.addEventListener('resize', handleResize, { passive: true });
 
     return () => {
       document.removeEventListener('click', handleAnchorClick, { capture: true });
       window.removeEventListener('resize', handleResize);
-      gsap.ticker.remove(tickerUpdate);
-      lenis.destroy();
+      if (tickerUpdate) {
+        gsap.ticker.remove(tickerUpdate);
+      }
+      if (lenis) {
+        lenis.destroy();
+      }
       lenisRef.current = null;
       setLenisInstance(null);
       delete (window as unknown as { lenis?: Lenis }).lenis;
@@ -116,13 +140,19 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
         onComplete: options?.onComplete,
       });
     } else {
+      const behavior: ScrollBehavior = options?.immediate ? 'auto' : 'smooth';
+      const offset = options?.offset ?? 0;
       if (typeof target === 'string') {
         const el = document.querySelector(target);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY + offset;
+          window.scrollTo({ top: Math.max(0, top), behavior });
+        }
       } else if (target instanceof HTMLElement) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        const top = target.getBoundingClientRect().top + window.scrollY + offset;
+        window.scrollTo({ top: Math.max(0, top), behavior });
       } else if (typeof target === 'number') {
-        window.scrollTo({ top: target, behavior: 'smooth' });
+        window.scrollTo({ top: Math.max(0, target + offset), behavior });
       }
     }
   }, []);
