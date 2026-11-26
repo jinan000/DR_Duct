@@ -704,6 +704,38 @@
     white-space: nowrap;
   }
 
+  .hero__motion-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: border-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hero__motion-btn:active {
+    border-color: rgba(216, 240, 0, 0.6);
+    color: var(--color-white);
+  }
+
+  .hero__motion-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-lime);
+    box-shadow: 0 0 6px rgba(216, 240, 0, 0.55);
+  }
+
   .hero__side-labels {
     display: none;
   }

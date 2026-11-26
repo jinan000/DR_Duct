@@ -11,6 +11,7 @@ import HeroContent from './hero/HeroContent';
 // @ts-ignore
 import SideRays from '../ui/SideRays';
 import LightRays from '../ui/LightRays';
+import { useGyroParallax } from '../../hooks/useGyroParallax';
 import './Hero.css';
 
 // ── Asset import ──
@@ -38,6 +39,13 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
   );
 
   const [wordIndex, setWordIndex] = useState(0);
+
+  // Mobile gyroscope tilt parallax (no-op on desktop or reduced motion)
+  const { permission: gyroPermission, requestPermission: requestGyroPermission } = useGyroParallax({
+    sectionRef,
+    enabled: preloaderDone,
+    prefersReducedMotion,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -431,7 +439,10 @@ export default function Hero({ preloaderDone = false }: HeroProps) {
 
       {/* ── Hero Content (Typography) ── */}
       <div className="hero__content-container">
-        <HeroContent />
+        <HeroContent
+          showMotionPrompt={gyroPermission === 'prompt'}
+          onEnableMotion={requestGyroPermission}
+        />
       </div>
 
     </section>

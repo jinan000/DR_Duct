@@ -8,10 +8,12 @@ import { useSmoothScroll } from '../../../context/SmoothScroll';
 
 interface HeroContentProps {
   className?: string;
+  showMotionPrompt?: boolean;
+  onEnableMotion?: () => void;
 }
 
 const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
-  ({ className = '' }, ref) => {
+  ({ className = '', showMotionPrompt = false, onEnableMotion }, ref) => {
     const { scrollTo } = useSmoothScroll();
 
     const handleBookingClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -88,6 +90,19 @@ const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
                 </svg>
               </span>
             </a>
+
+            {showMotionPrompt && onEnableMotion && (
+              <button
+                type="button"
+                id="hero-enable-motion-btn"
+                className="hero__motion-btn"
+                onClick={onEnableMotion}
+                aria-label="Enable gyroscope tilt motion effect"
+              >
+                <span className="hero__motion-dot" aria-hidden="true" />
+                <span>ENABLE MOTION</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
