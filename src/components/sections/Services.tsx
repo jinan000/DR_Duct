@@ -1,5 +1,4 @@
 import { useInView } from '../../hooks/useInView';
-import QuoteButton from '../ui/QuoteButton';
 import AccordionGallery from '../ui/AccordionGallery';
 import './Services.css';
 
@@ -118,11 +117,6 @@ export default function Services() {
             radius={16}
             orientation="horizontal"
           />
-        </div>
-
-        {/* Global CTA for section */}
-        <div className={`services-cta-wrap anim-reveal delay-600 ${sectionInView ? 'is-visible' : ''}`}>
-           <QuoteButton id="services-quote-btn" label="EXPLORE OUR SERVICES" />
         </div>
 
       </div>
